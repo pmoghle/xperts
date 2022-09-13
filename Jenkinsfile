@@ -14,7 +14,7 @@ pipeline {
    stage('Building image') {
       steps{
         script {
-          sh 'sudo docker build -t pooja -f ./Dockerfile.txt .' 
+          sh 'docker build -t pooja -f ./Dockerfile.txt .' 
 
         }
        }
