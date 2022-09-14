@@ -28,7 +28,7 @@ pipeline {
 	  //sh "docker login -u admin -p pooja 65.2.29.89:8083/repository/docker-grp/" 
           //sh " docker push 65.2.29.89:8083/repository/docker-grp/pooja"
           //sh "docker logout 65.2.29.89:8083/repository/docker-grp/"
-           sh 'curl -XGET "admin:pooja" -X PUT http://65.2.29.89/:8081/repository/python/pooja '
+           sh 'curl -XGET "admin:pooja" -X PUT http://65.2.29.89:8081/repository/python/pooja '
 	    }
           }
         }
