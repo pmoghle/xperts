@@ -36,7 +36,7 @@ pipeline {
 	  //sh "docker login -u admin -p pooja 65.2.29.89:8083/repository/docker-grp/" 
           //sh " docker push 65.2.29.89:8083/repository/docker-grp/pooja:1.0"
           //sh "docker logout 65.2.29.89:8083/repository/docker-grp/"
-           sh 'curl  -u "admin:pooja" -X PUT 'http://65.2.29.89:8081/repository/docker-grp/pooja:1.0-"$BUILD_NUMBER.tar"'	
+           sh 'curl  -u "admin:pooja" -X PUT http://65.2.29.89:8081/repository/docker-grp/pooja:1.0-$BUILD_NUMBER.tar'	
 	    }
           }
         }
