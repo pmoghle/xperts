@@ -14,8 +14,8 @@ pipeline {
    stage('Building image') {
       steps{
         script { 
-		ls -lrth
-          sh 'sudo docker  build -t pooja  .'         
+		sh "ls -lrth"
+          	sh "sudo docker  build -t pooja  ."         
 
 
         }
