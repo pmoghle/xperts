@@ -24,10 +24,10 @@ pipeline {
     stage('Deploy Image in to nexus registry') {
       steps{
         script {
-	  sh ' docker tag pooja 65.2.29.89:8083/repository/docker-grp/pooja'
-	  sh ' docker login -u admin -p pooja 65.2.29.89:8083/repository/docker-grp/' 
-          sh ' docker push 65.2.29.89:8083/repository/docker-grp/flask-app:2.0'
-          sh ' docker logout 65.2.29.89:8083/repository/docker-grp/'
+	  sh "docker tag pooja 65.2.29.89:8083/repository/docker-grp/pooja"
+	  sh "docker login -u admin -p pooja 65.2.29.89:8083/repository/docker-grp/" 
+          sh " docker push 65.2.29.89:8083/repository/docker-grp/pooja"
+          sh "docker logout 65.2.29.89:8083/repository/docker-grp/"
           // sh 'curl -XGET "admin:pooja" -X PUT http://3.110.86.199:8081/repository/python/flask-app '
 	    }
           }
