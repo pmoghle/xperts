@@ -1,10 +1,8 @@
 
 pipeline {
   environment {
-// 	imageName="pooja"
-    	registry = "http://65.2.29.89:8083/repository/mvn/"
-    	registryCredential = "nexusrepo"
-
+    registry = "http://65.2.29.89:8083/repository/mvn/"
+    registryCredential = "nexusrepo"
     }
   agent any
   stages {
@@ -21,13 +19,13 @@ pipeline {
 	}
       }
     }
-	  stage('save_docker_image_as_Tar'){
-             steps{
-	       script{
-	                sh '''docker save -o pooja:1.0-$BUILD_NUMBER.tar pooja:1.0
-                         //sleep 0.05
+ 	  stage('save_docker_image_as_Tar'){
+              steps{
+ 	       script{
+ 	                sh '''docker save -o pooja:1.0-$BUILD_NUMBER.tar pooja:1.0
+                         sleep 0.05
                          docker rmi pooja:1.0 -f
-                        chmod 775 pooja:1.0-"$BUILD_NUMBER".tar'''
+                         chmod 775 pooja:1.0-"$BUILD_NUMBER".tar'''
 	       }
 	     }
 	  }
