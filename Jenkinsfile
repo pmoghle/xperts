@@ -15,7 +15,7 @@ pipeline {
       steps{
         script { 
 		sh "ls -lrth"
-          	sh "docker  build -t pooja:1.0 ."         
+          	sh "sudo docker  build -t pooja:1.0 ."         
 	}
       }
     }
