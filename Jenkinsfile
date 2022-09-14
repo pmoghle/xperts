@@ -1,10 +1,15 @@
 
 pipeline {
-  environment {
-    registry = "http://65.2.29.89:8083/repository/mvn/"
-    registryCredential = "nexusrepo"
-    }
+	
   agent any
+	
+  environment {
+	  imageName="pooja"
+	  registryCredential = "nexusrepo"
+	  registry = "65.2.29.89:8083/repository/mvn/"
+	  dockerImage="
+    }
+	
   stages {
     stage('Cloning Git') {
       steps {
@@ -14,21 +19,22 @@ pipeline {
    stage('Building image') {
       steps{
         script { 
-		sh "ls -lrth"
-          	sh "docker  build -t pooja:1.0 ."         
+// 		sh "ls -lrth"
+//           	sh "docker  build -t pooja:1.0 ."
+		dockerImage = docker.build imageName 
 	}
       }
     }
- 	  stage('save_docker_image_as_Tar'){
-              steps{
- 	       script{
- 	                sh '''docker save -o pooja:1.0-$BUILD_NUMBER.tar pooja:1.0
-                         sleep 0.05
-                         docker rmi pooja:1.0 -f
-                         chmod 775 pooja:1.0-"$BUILD_NUMBER".tar'''
-	       }
-	     }
-	  }
+//  	  stage('save_docker_image_as_Tar'){
+//               steps{
+//  	       script{
+//  	                sh '''docker save -o pooja:1.0-$BUILD_NUMBER.tar pooja:1.0
+//                          sleep 0.05
+//                          docker rmi pooja:1.0 -f
+//                          chmod 775 pooja:1.0-"$BUILD_NUMBER".tar'''
+// 	       }
+// 	     }
+// 	  }
     stage('Deploy Image in to nexus registry') {
       steps{
         script {
@@ -39,7 +45,7 @@ pipeline {
           // sh 'curl  -u "admin:pooja" -XPUT http://65.2.29.89:8081/repository/mvn/pooja:1.0-"$BUILD_NUMBER".tar'
 		docker.withRegistry('http://'+registry, registryCredential)
 // 		docker.withRegistry(http://65.2.29.89:8083/repository/mvn/, registryCredential)
-// 		dockerImage.push('1.0')
+// 		dockerImage.push('latest')
 	    }
           }
         }
