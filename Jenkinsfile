@@ -16,10 +16,18 @@ pipeline {
         script { 
 		sh "ls -lrth"
           	sh "docker  build -t pooja:1.0 ."         
-
-
-        }
-       }
+	}
+      }
+    }
+	  stage('save_docker_image_as_Tar'){
+             steps{
+	       script{
+	                sh '''docker save -o pooja:1.0-$BUILD_NUMBER.tar pooja:1.0
+                        sleep 0.05
+                        docker rmi pooja:1.0 -f
+                        chmod 775 pooja:1.0-"$BUILD_NUMBER".tar'''
+	       }
+	     }
 	  }
     stage('Deploy Image in to nexus registry') {
       steps{
